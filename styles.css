@@ -111,11 +111,6 @@ shadow {
   margin-bottom: calc(36/16 * 1rem);
 }
 
-.password-container {
-  display: flex;
-  gap: 24px;
-}
-
 .password-output {
   width: 210px;
   height: 40px;
@@ -210,11 +205,5 @@ a:focus {
 
   .divider {
     width: 100%;
-  }
-
-  .password-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
   }
 }
