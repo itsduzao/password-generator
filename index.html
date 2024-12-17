@@ -10,6 +10,7 @@
     href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Karla:ital,wght@0,200..800;1,200..800&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script defer src="index.js" type="module"></script>
   <title>Password Generator</title>
 </head>
 
@@ -21,9 +22,7 @@
       passwords</button>
     <hr class="divider" id="between-generate-and-password">
     <div class="password-container">
-      <input type="text" id="first-password-output" class="password-output" placeholder="Password appears here"
-        aria-label="Output for random generated password" aria-live="polite" readonly>
-      <input type="text" id="second-password-output" class="password-output" placeholder="Password appears here"
+      <input type="text" id="password-output" class="password-output" placeholder="Password appears here"
         aria-label="Output for random generated password" aria-live="polite" readonly>
     </div>
   </main>
