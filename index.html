@@ -15,13 +15,16 @@
 
 <body>
   <main id="main-container">
-    <h1 id="main-title">Generate a <br/> <span id="main-title-span">random password</span></h1>
+    <h1 id="main-title">Generate a <br /> <span id="main-title-span">random password</span></h1>
     <h3 id="sub-title">Never use an insecure password again.</h3>
-    <button class="btn" id="btn-generate-password">Generate passwords</button>
+    <button class="btn" id="btn-generate-password" aria-label="Generate password" role="button">Generate
+      passwords</button>
     <hr class="divider" id="between-generate-and-password">
     <div class="password-container">
-      <input type="text" id="first-password-output" class="password-output" placeholder="Password appears here" readonly>
-      <input type="text" id="second-password-output" class="password-output" placeholder="Password appears here" readonly>
+      <input type="text" id="first-password-output" class="password-output" placeholder="Password appears here"
+        aria-label="Output for random generated password" aria-live="polite" readonly>
+      <input type="text" id="second-password-output" class="password-output" placeholder="Password appears here"
+        aria-label="Output for random generated password" aria-live="polite" readonly>
     </div>
   </main>
 </body>
