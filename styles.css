@@ -8,8 +8,11 @@
   --bg-primary-color: #1F2937;
   --bg-secondary-color: #273549;
 
-
   --btn-primary-background-color: #10B981;
+
+  --btn-focus-color: #0d9e6f;
+
+  --input-focus-background-color: #364153;
 
   --white: #FFFFFF;
 }
@@ -75,6 +78,8 @@ shadow {
   display: flex;
 
   border: none;
+
+  cursor: pointer;
 }
 
 .btn#btn-generate-password {
@@ -98,7 +103,7 @@ shadow {
 }
 
 .divider {
-  width: 446px;
+  width: clamp(250px - 30%, 100%, 446px);
   border: 1px solid var(--bg-secondary-color);
 }
 
@@ -108,6 +113,7 @@ shadow {
 
 .password-container {
   display: flex;
+  flex-wrap: wrap;
   gap: 24px;
 }
 
@@ -133,4 +139,42 @@ shadow {
   color: var(--fc-secondary);
   text-align: center;
   text-wrap: pretty;
+}
+
+/* Efeitos de transição */
+
+/* Estilo básico de foco para todos os elementos interativos */
+*:focus {
+  outline: 3px solid var(--btn-primary-background-color);
+  outline-offset: 2px;
+}
+
+/* Estilo personalizado para o botão de gerar senha */
+#btn-generate-password:focus {
+  background-color: var(--btn-focus-color);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+  transform: scale(1.05);
+  transition: all 0.2s ease;
+}
+
+/* Estilo para inputs de senha */
+.password-output:focus {
+  border: 2px solid var(--fc-primary);
+  background-color: var(--input-focus-background-color);
+  color: var(--white);
+}
+
+/* Efeito de foco para links (se houver) */
+a:focus {
+  text-decoration: underline;
+  color: var(--fc-primary);
+  outline: 2px dashed var(--fc-primary);
+  outline-offset: 3px;
+}
+
+/* Removendo o contorno padrão com um estilo personalizado */
+*:focus-visible {
+  outline: 3px solid var(--btn-primary-background-color);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
