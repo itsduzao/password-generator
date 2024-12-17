@@ -1,0 +1,135 @@
+:root {
+  --ff-primary: 'Inter', sans-serif;
+  --ff-secondary: 'Karla', sans-serif;
+
+  --fc-primary: #55F991;
+  --fc-secondary: #D5D4D8;
+
+  --bg-primary-color: #1F2937;
+  --bg-secondary-color: #273549;
+
+
+  --btn-primary-background-color: #10B981;
+
+  --white: #FFFFFF;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body {
+  font-family: var(--ff-primary);
+
+  background-color: var(--bg-primary-color);
+
+  max-width: 550px;
+
+  margin: 0 auto;
+}
+
+#main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+
+  padding: 116px 52px;
+}
+
+#main-title {
+  font-family: var(--ff-secondary);
+  font-size: calc((40/16) * 1rem);
+  font-weight: 800;
+  line-height: 40px;
+  letter-spacing: -0.025em;
+  text-align: left;
+
+  color: white;
+
+  margin-bottom: 10px;
+}
+
+#main-title #main-title-span {
+  color: var(--fc-primary);
+}
+
+shadow {
+  box-shadow: 0px 1px 2px 0px #0000000D;
+}
+
+#sub-title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: calc((20/16) * 1rem);
+  line-height: 28px;
+
+  color: var(--fc-secondary);
+
+  margin-bottom: 52px;
+}
+
+.btn {
+  display: flex;
+
+  border: none;
+}
+
+.btn#btn-generate-password {
+  padding: 9px 17px 9px 15px;
+
+  background: var(--btn-primary-background-color);
+
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+
+  margin-bottom: 36px;
+
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 24px;
+
+  color: var(--white);
+}
+
+.divider {
+  width: 446px;
+  border: 1px solid var(--bg-secondary-color);
+}
+
+.divider#between-generate-and-password {
+  margin-bottom: 36px;
+}
+
+.password-container {
+  display: flex;
+  gap: 24px;
+}
+
+.password-output {
+  width: 210px;
+  height: 40px;
+
+  text-align: center;
+  color: var(--fc-primary);
+
+  background: var(--bg-secondary-color);
+  border-radius: 6px;
+  border: none;
+
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 32px;
+  text-align: center;
+}
+
+.password-output::placeholder{
+  color: var(--fc-secondary);
+  text-align: center;
+  text-wrap: pretty;
+}
