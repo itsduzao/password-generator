@@ -1,23 +1,36 @@
 const CHAR_SETS = {
-  capitalLetters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
-  lowerLetters: 'abcdefghijklmnopqrstuvwxyz'.split(''),
+  uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
+  lowercase: 'abcdefghijklmnopqrstuvwxyz'.split(''),
   numbers: '0123456789'.split(''),
-  specialCharacters: '!@#$%^&*()_+[]{}|;:,.<>?/'.split(''),
+  specialChars: '!@#$%^&*()_+[]{}|;:,.<>?/'.split(''),
 }
 
-export function generatePassword (length) {
+export function generatePassword (options) {
   let password = ''
-  const allCharacters = [
-    ...CHAR_SETS.capitalLetters,
-    ...CHAR_SETS.lowerLetters,
-    ...CHAR_SETS.numbers,
-    ...CHAR_SETS.specialCharacters,
-  ]
+  let charactersArray = [...CHAR_SETS.uppercase, ...CHAR_SETS.lowercase]
+  
+  let passwordLength = Number.parseInt(options.length)
 
-  for (let i = 0; i < length; i++) {
-    const randomIndex = Math.floor(Math.random() * allCharacters.length)
-    password += allCharacters[randomIndex]
+  const includeNumber = options.number
+  const includeSpecialCharacter = options.symbol
+
+  if (includeNumber) {
+    charactersArray = charactersArray.concat(CHAR_SETS.numbers)
+  }
+  
+  if (includeSpecialCharacter) {
+    charactersArray = charactersArray.concat(CHAR_SETS.specialChars)
   }
 
+  let charactersLength = charactersArray.length
+
+  for (let i = 0; i < passwordLength; i++) {
+    const randomIndex = getRandomIndex(charactersLength)
+    password += charactersArray[randomIndex]
+  }
   return password
+}
+
+function getRandomIndex(length){
+  return Math.floor(Math.random() * length)
 }
