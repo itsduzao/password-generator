@@ -74,8 +74,11 @@ body {
   width: 100%;
 
   display: flex;
-  justify-content: safe;
+  justify-content: space-between;
   align-items: center;
+
+  flex-wrap: wrap;
+  flex-basis: content;
 
   gap: 20px;
 
@@ -229,6 +232,12 @@ a:focus {
   #sub-title {
     text-align: center;
     margin-bottom: calc(36/16 * 1rem);
+  }
+
+  .password-options-container{
+    flex-direction: column;
+    
+    gap: 30px;
   }
 
   #btn-generate-password {
