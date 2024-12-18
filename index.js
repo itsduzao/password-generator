@@ -5,22 +5,26 @@ const passwordDisplayElement = document.getElementById('password-output')
 const passwordLengthOptionElement = document.getElementById(
   'password-length-input'
 )
-const passwordNumberOptionElement = document.getElementById(
-  'password-number-checkbox'
+const passwordNumbersOptionElement = document.getElementById(
+  'password-numbers-checkbox'
 )
-const passwordSymbolOptionElement = document.getElementById(
-  'password-symbols-checkbox'
+const passwordSpecialCharsOptionElement = document.getElementById(
+  'password-special-chars-checkbox'
 )
 
 btnGeneratePassword.addEventListener('click', () => {
   const passwordLength = passwordLengthOptionElement.value
-  const addNumber = passwordNumberOptionElement.checked
-  const addSymbol = passwordSymbolOptionElement.checked
+  const includeNumber = passwordNumbersOptionElement.checked
+  const includeSpecialChar = passwordSpecialCharsOptionElement.checked
 
   const passwordOptions = {
     length: passwordLength,
-    number: addNumber,
-    symbol: addSymbol,
+    charGroups: {
+    lowercase: true,
+    uppercase: true,
+    numbers: includeNumber,
+    specialChars: includeSpecialChar,
+    }
   }
 
   const password = generatePassword(passwordOptions)
