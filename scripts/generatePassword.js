@@ -1,36 +1,50 @@
-const CHAR_SETS = {
+const CHAR_GROUPS = {
   uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
   lowercase: 'abcdefghijklmnopqrstuvwxyz'.split(''),
   numbers: '0123456789'.split(''),
   specialChars: '!@#$%^&*()_+[]{}|;:,.<>?/'.split(''),
 }
 
-export function generatePassword (options) {
-  let password = ''
-  let charactersArray = [...CHAR_SETS.uppercase, ...CHAR_SETS.lowercase]
-  
-  let passwordLength = Number.parseInt(options.length)
+export function generatePassword(options) {
+  const targetLength = Number.parseInt(options.length)
 
-  const includeNumber = options.number
-  const includeSpecialCharacter = options.symbol
+  const selectedCharGroups = Object.keys(options.charGroups).filter(
+    group => options.charGroups[group]
+  )
 
-  if (includeNumber) {
-    charactersArray = charactersArray.concat(CHAR_SETS.numbers)
+  const tempPassword = selectedCharGroups.map(group =>
+    generateRandomCharacter(group)
+  )
+
+  while (tempPassword.length < targetLength) {
+    const randomGroup =
+      selectedCharGroups[generateRandomIndex(selectedCharGroups)]
+    const randomCharacter = generateRandomCharacter(randomGroup)
+    tempPassword.push(randomCharacter)
   }
-  
-  if (includeSpecialCharacter) {
-    charactersArray = charactersArray.concat(CHAR_SETS.specialChars)
-  }
 
-  let charactersLength = charactersArray.length
+  const password = shuffleArray(tempPassword).join("")
 
-  for (let i = 0; i < passwordLength; i++) {
-    const randomIndex = getRandomIndex(charactersLength)
-    password += charactersArray[randomIndex]
-  }
   return password
 }
 
-function getRandomIndex(length){
-  return Math.floor(Math.random() * length)
+function generateRandomCharacter(charGroup) {
+  const chars = CHAR_GROUPS[charGroup]
+  const randomIndex = generateRandomIndex(chars)
+  const randomCharacter = chars[randomIndex]
+  return randomCharacter
 }
+
+function generateRandomIndex(array) {
+  return Math.floor(Math.random() * array.length)
+}
+
+function shuffleArray(array) {
+  const shuffled = [...array]
+  shuffled.reduce((acc, item, currentIndex) => {
+    const randomIndex = generateRandomIndex(array);
+    [shuffled[randomIndex], shuffled[currentIndex]] = [shuffled[currentIndex], shuffled[randomIndex]]
+  })
+  return shuffled
+}
+
