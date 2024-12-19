@@ -2,20 +2,20 @@ import { generatePassword } from './scripts/generatePassword.js'
 
 const btnGeneratePassword = document.getElementById('btn-generate-password')
 const passwordDisplayElement = document.getElementById('password-output')
-const passwordLengthOptionElement = document.getElementById(
+const passwordLengthInput = document.getElementById(
   'password-length-input'
 )
-const passwordNumbersOptionElement = document.getElementById(
+const includeNumbersCheckbox = document.getElementById(
   'password-numbers-checkbox'
 )
-const passwordSpecialCharsOptionElement = document.getElementById(
+const includeSpecialCharsCheckbox = document.getElementById(
   'password-special-chars-checkbox'
 )
 
 btnGeneratePassword.addEventListener('click', () => {
-  const passwordLength = passwordLengthOptionElement.value
-  const includeNumber = passwordNumbersOptionElement.checked
-  const includeSpecialChar = passwordSpecialCharsOptionElement.checked
+  const passwordLength = passwordLengthInput.value
+  const includeNumber = includeNumbersCheckbox.checked
+  const includeSpecialChar = includeSpecialCharsCheckbox.checked
 
   const passwordOptions = {
     length: passwordLength,
