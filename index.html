@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -20,8 +20,8 @@
     <h3 id="sub-title">Never use an insecure password again.</h3>
     <div class="password-options-container">
       <div class="password-length-container">
-        <label for="password-length" id="password-length-label" class="password-options-label">Length</label>
-        <input type="number" id="password-length-input" class="password-options" min="8" max="32" value="15"
+        <label for="password-length-input" id="password-length-label" class="password-options-label">Length</label>
+        <input type="number" id="password-length-input" class="password-options" min="8" max="20" value="12"
           aria-label="Password length" aria-live="polite">
       </div>
       <div class="password-checkbox-container">
@@ -29,22 +29,34 @@
           class="password-options-label">Numbers</label>
         <input type="checkbox" id="password-numbers-checkbox" class="password-options"
           aria-label="Checkbox for enabling numbers on password" aria-live="polite">
-        </div>
-        <div class="password-checkbox-container">
+      </div>
+      <div class="password-checkbox-container">
         <label for="password-special-chars-checkbox" id="password-special-chars-checkbox-label"
           class="password-options-label">Special Characters</label>
         <input type="checkbox" id="password-special-chars-checkbox" class="password-options"
           aria-label="Checkbox for enabling special characters on password" aria-live="polite">
       </div>
     </div>
-    <button class="btn" id="btn-generate-password" aria-label="Generate password" role="button">Generate
-      passwords</button>
+    <button title="Generate password" class="btn-light" id="btn-generate-password" aria-label="Generate password"
+      role="button">Generate
+      password</button>
     <hr class="divider" id="between-generate-and-password">
-    <div class="password-container">
+    <div class="password-output-container">
       <input type="text" id="password-output" class="password-output" placeholder="Password appears here"
-        aria-label="Output for random generated password" aria-live="polite" readonly>
+        aria-label="Output for password" aria-live="polite" readonly>
+      <button title="Copy to clipboard" class="btn-light" id="btn-copy-to-clipboard"
+        aria-label="Copy password to clipboard" role="button">
+        <svg xmlns="http://www.w3.org/2000/svg" class="gfg-icon" width="20" height="20" viewBox="0 0 24 24"
+          stroke-width="2.0" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <title>Two boards in front of each other</title>
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z"></path>
+          <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+        </svg>
+      </button>
     </div>
   </main>
+  <div class="toast" id="copy-toast">Password copied to clipboard!</div>
 </body>
 
 </html>
