@@ -23,7 +23,7 @@ export function generatePassword(options) {
     tempPassword.push(randomCharacter)
   }
 
-  const password = shuffleArray(tempPassword).join("")
+  const password = shuffleArray(tempPassword).join('')
 
   return password
 }
@@ -41,9 +41,12 @@ function generateRandomIndex(array) {
 
 function shuffleArray(array) {
   const shuffled = [...array]
-  shuffled.reduce((acc, item, currentIndex) => {
-    const randomIndex = generateRandomIndex(array);
-    [shuffled[randomIndex], shuffled[currentIndex]] = [shuffled[currentIndex], shuffled[randomIndex]]
+  shuffled.reduce((_acc, _item, currentIndex) => {
+    const randomIndex = generateRandomIndex(array)
+    ;[shuffled[randomIndex], shuffled[currentIndex]] = [
+      shuffled[currentIndex],
+      shuffled[randomIndex],
+    ]
   })
   return shuffled
 }
