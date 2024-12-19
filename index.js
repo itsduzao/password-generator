@@ -31,3 +31,25 @@ btnGeneratePassword.addEventListener('click', () => {
   passwordDisplayElement.value = password
 })
 
+const btnCopyToClipBoard = document.getElementById("btn-copy-to-clipboard")
+
+btnCopyToClipBoard.addEventListener('click', () => copyToClipBoard(passwordDisplayElement.value))
+
+async function copyToClipBoard(text) {
+  if (!passwordDisplayElement.value) return
+  
+  try {
+    await navigator.clipboard.writeText(passwordDisplayElement.value);
+    
+    const toast = document.getElementById('copy-toast');
+    toast.classList.add('show');
+    
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3000);
+    
+  } catch (err) {
+    passwordDisplayElement.select();
+    document.execCommand('copy');
+  }
+}
