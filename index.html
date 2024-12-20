@@ -18,32 +18,39 @@
   <main id="main-container">
     <h1 id="main-title">Generate a <br /> <span id="main-title-span">random password</span></h1>
     <h3 id="sub-title">Never use an insecure password again.</h3>
-    <div class="password-options-container">
+    <form id="password-form" autocomplete="off">
       <div class="password-length-container">
-        <label title="A number between 8 and 20" for="password-length-input" id="password-length-label" class="password-options-label">Length</label>
-        <input title="A number between 8 and 20" type="number" id="password-length-input" class="password-options" min="8" max="20" value="12" 
-          aria-label="Password length" aria-live="polite">
+        <label for="password-length-input" id="password-length-label" class="password-options-label">Characters</label>
+        <input type="range" id="password-length-input" class="password-options" min="8" max="20" value="12" aria-labelledby="password-length-label" aria-live="polite" aria-valuemin="8" aria-valuemax="20" aria-valuenow="12">
+        <output id="password-length-output" for="password-length-input">12</output>
+        <span id="password-length-description" class="sr-only">Select the number of characters for your password. Minimum 8, maximum 20.</span>
       </div>
-      <div class="password-checkbox-container">
-        <label for="password-numbers-checkbox" id="password-numbers-checkbox-label"
-          class="password-options-label">Numbers</label>
-        <input type="checkbox" id="password-numbers-checkbox" class="password-options"
-          aria-label="Checkbox for enabling numbers on password" aria-live="polite">
+        <div class="password-checkbox-container">
+          <label for="password-lowercase-checkbox" id="password-lowercase-checkbox-label"
+            class="password-options-label">Lowercase</label>
+          <input type="checkbox" id="password-lowercase-checkbox" class="password-options"
+            aria-labelledby="password-lowercase-checkbox-label" aria-live="polite">
+            <label for="password-uppercase-checkbox" id="password-uppercase-checkbox-label"
+              class="password-options-label">Uppercase</label>
+            <input type="checkbox" id="password-uppercase-checkbox" class="password-options"
+              aria-labelledby="password-uppercase-checkbox-label" aria-live="polite">
+          <label for="password-numbers-checkbox" id="password-numbers-checkbox-label"
+            class="password-options-label">Numbers</label>
+          <input type="checkbox" id="password-numbers-checkbox" class="password-options"
+          aria-labelledby="password-numbers-checkbox-label" aria-live="polite">
+          <label for="password-special-chars-checkbox" id="password-special-chars-checkbox-label"
+            class="password-options-label">Special Characters</label>
+          <input type="checkbox" id="password-special-chars-checkbox" class="password-options"
+          aria-labelledby="password-special-chars-checkbox-label" aria-live="polite">
+        </div>
       </div>
-      <div class="password-checkbox-container">
-        <label for="password-special-chars-checkbox" id="password-special-chars-checkbox-label"
-          class="password-options-label">Special Characters</label>
-        <input type="checkbox" id="password-special-chars-checkbox" class="password-options"
-          aria-label="Checkbox for enabling special characters on password" aria-live="polite">
-      </div>
-    </div>
-    <button title="Generate password" class="btn-light" id="btn-generate-password" aria-label="Generate password"
-      role="button">Generate
-      password</button>
+      <button title="Generate password" class="btn-light" id="btn-generate-password" aria-label="Generate password"
+        role="button">Generate password</button>
+    </form>
     <hr class="divider" id="between-generate-and-password">
     <div class="password-output-container">
-      <input type="text" id="password-output" class="password-output" placeholder="Password appears here"
-        aria-label="Output for password" aria-live="polite" readonly>
+      <input type="text" id="password-output" class="password-output" autocomplete="off"
+        placeholder="Password appears here" aria-label="Output for password" aria-live="polite" readonly>
       <button title="Copy to clipboard" class="btn-light" id="btn-copy-to-clipboard"
         aria-label="Copy password to clipboard" role="button">
         <svg xmlns="http://www.w3.org/2000/svg" class="gfg-icon" width="20" height="20" viewBox="0 0 24 24"
