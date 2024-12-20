@@ -1,5 +1,6 @@
 import { generatePassword } from './scripts/generatePassword.js'
 
+const passwordForm = document.getElementById('password-form');
 const btnGeneratePassword = document.getElementById('btn-generate-password')
 const passwordDisplayElement = document.getElementById('password-output')
 const passwordLengthInput = document.getElementById(
@@ -12,18 +13,24 @@ const includeSpecialCharsCheckbox = document.getElementById(
   'password-special-chars-checkbox'
 )
 
-btnGeneratePassword.addEventListener('click', () => {
+document.addEventListener('DOMContentLoaded', () => {
+  passwordForm.reset();
+});
+
+btnGeneratePassword.addEventListener('click', (event) => {
+  event.preventDefault()
+  
   const passwordLength = passwordLengthInput.value
-  const includeNumber = includeNumbersCheckbox.checked
-  const includeSpecialChar = includeSpecialCharsCheckbox.checked
+  const isNumberIncluded = includeNumbersCheckbox.checked
+  const isSpecialCharIncluded = includeSpecialCharsCheckbox.checked
 
   const passwordOptions = {
     length: passwordLength,
     charGroups: {
     lowercase: true,
     uppercase: true,
-    numbers: includeNumber,
-    specialChars: includeSpecialChar,
+    numbers: isNumberIncluded,
+    specialChars: isSpecialCharIncluded,
     }
   }
 
@@ -53,3 +60,22 @@ async function copyToClipBoard(text) {
     document.execCommand('copy');
   }
 }
+
+function preventPasteAndDrop(event) {
+  event.preventDefault();
+  return false;
+}
+
+passwordLengthInput.addEventListener('paste', preventPasteAndDrop)
+passwordLengthInput.addEventListener('drop', preventPasteAndDrop);
+passwordLengthInput.addEventListener('dragover', preventPasteAndDrop);
+
+function validateNumberInput(event) {
+  return /[0-9]/.test(event.key);
+}
+
+passwordLengthInput.addEventListener('keypress', (event) => {
+  if (!validateNumberInput(event)) {
+    event.preventDefault();
+  }
+});
