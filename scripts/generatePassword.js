@@ -5,44 +5,54 @@ const CHAR_GROUPS = {
   specialChars: '!@#$%^&*()_+[]{}|;:,.<>?/'.split(''),
 }
 
-export function generatePassword(options) {
-  const targetLength = Number.parseInt(options.length)
+export function generatePassword({ length, characterGroups }) {
+  const passwordArr = [] 
+  const targetLength = Number.parseInt(length)
 
-  const selectedCharGroups = Object.keys(options.charGroups).filter(
-    group => options.charGroups[group]
+  const selectedCharacterGroups = Object.keys(characterGroups).filter(
+    group => characterGroups[group]
   )
 
-  const tempPassword = selectedCharGroups.map(group =>
-    generateRandomCharacter(group)
+  const reorderedSelectedCharGroups = shuffleArray(selectedCharacterGroups)
+  
+  // Se targetLength > selectedGroups  
+  // adiciona ao menos um char de cada grupo
+  reorderedSelectedCharGroups.map(group => {
+    if (reorderedSelectedCharGroups.length <= targetLength) {
+      passwordArr.push(generateRandomCharacter(group))
+    }
+  }
   )
 
-  while (tempPassword.length < targetLength) {
+  // selectedGroups > targetLength
+  while (passwordArr.length < targetLength) {
     const randomGroup =
-      selectedCharGroups[generateRandomIndex(selectedCharGroups)]
+      reorderedSelectedCharGroups[generateRandomIndex(reorderedSelectedCharGroups.length)]
     const randomCharacter = generateRandomCharacter(randomGroup)
-    tempPassword.push(randomCharacter)
+    passwordArr.push(randomCharacter)
   }
 
-  const password = shuffleArray(tempPassword).join('')
+  const password = passwordArr.join('')
+  console.log("🚀 ~ generatePassword ~ password:", password)
 
   return password
 }
 
-function generateRandomCharacter(charGroup) {
-  const chars = CHAR_GROUPS[charGroup]
-  const randomIndex = generateRandomIndex(chars)
+function generateRandomCharacter(characterGroups) {
+  const chars = CHAR_GROUPS[characterGroups]
+  const randomIndex = generateRandomIndex(chars.length)
   const randomCharacter = chars[randomIndex]
   return randomCharacter
 }
 
-function generateRandomIndex(array) {
-  return Math.floor(Math.random() * array.length)
+function generateRandomIndex(arrayLength) {
+  return Math.floor(Math.random() * arrayLength)
 }
 
 function shuffleArray(array) {
   const shuffled = [...array]
   shuffled.reduce((_acc, _item, currentIndex) => {
-    const randomIndex = generateRandomIndex(array)
+    const randomIndex = generateRandomIndex(shuffled.length)
     ;[shuffled[randomIndex], shuffled[currentIndex]] = [
       shuffled[currentIndex],
       shuffled[randomIndex],
@@ -51,3 +61,12 @@ function shuffleArray(array) {
   return shuffled
 }
 
+
+const myObj = {length: 2, characterGroups: {
+  lowercase: true,
+  uppercase: true,
+  numbers: true,
+  specialChars: true
+}} 
+
+generatePassword(myObj)
