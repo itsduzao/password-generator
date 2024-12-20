@@ -70,6 +70,10 @@ body {
   margin-bottom: calc(52/16 * 1rem);
 }
 
+form#password-form{
+  width: 100%;
+}
+
 .password-options-container {
   width: 100%;
 
@@ -94,20 +98,114 @@ body {
   content: ": ";
 }
 
-input#password-length-input {
-  font-family: var(--ff-primary);
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 32px;
+.password-length-container {
+  width: 100%;
 
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 
+  margin-bottom: calc(36/16 * 1rem);
+}
+
+#password-length-input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: var(--bg-secondary-color);
+  border-radius: 5px;
+  outline: none;
+  transition: all 0.07s ease;
+}
+
+#password-length-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--btn-primary-background-color);
   border: none;
-  border-radius: 4px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.07s ease;
+}
 
-  padding: 0;
+#password-length-input::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: var(--btn-primary-background-color);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: all 0.07s ease;
+}
 
-  width: 40px;
+#password-length-input::-ms-thumb {
+  width: 20px;
+  height: 20px;
+  background: var(--btn-primary-background-color);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: all 0.07s ease;
+}
+
+#password-length-input:hover {
+  background: var(--input-focus-background-color);
+}
+
+#password-length-input:hover::-webkit-slider-thumb {  
+  transform: scale(1.10)
+}
+
+#password-length-input:hover::-moz-range-thumb {
+  transform: scale(1.10)
+}
+
+#password-length-input:hover::-ms-thumb {
+  transform: scale(1.10)
+}
+
+#password-length-input:focus::-webkit-slider-thumb {
+  outline: 3px solid var(--btn-primary-background-color);
+  outline-offset: 2px;
+}
+
+#password-length-input:focus::-moz-range-thumb {
+  outline: 3px solid var(--btn-primary-background-color);
+  outline-offset: 2px;
+}
+
+#password-length-input:focus::-ms-thumb {
+  outline: 3px solid var(--btn-primary-background-color);
+  outline-offset: 2px;
+}
+
+output#password-length-output {
+  color: var(--fc-secondary);
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.password-checkbox-container {
+  width: 100%;
+  
+  display: flex;
+  flex-flow: row wrap;
+  gap: 20px;
+
+  justify-content: space-between;
+
+  margin-bottom: calc(36/16 * 1rem);
+}
+
+.checkbox-wrapper {
+  display: flex;
+  flex-basis: content;
+  gap: 10px;
 }
 
 .btn-light {
@@ -116,6 +214,11 @@ input#password-length-input {
   border: none;
 
   cursor: pointer;
+}
+
+.btn-light:active {  
+  transform: scale(0.95);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 #btn-generate-password {
@@ -147,6 +250,7 @@ input#password-length-input {
 }
 
 .password-output-container {
+  width: 100%;
   display: flex;
   gap: 20px;
 }
@@ -167,12 +271,16 @@ input#password-length-input {
   font-weight: 500;
   line-height: 32px;
   text-align: center;
+
+  padding: 0 8px;
+
+  text-overflow: ellipsis;
 }
 
 .password-output::placeholder {
   color: var(--fc-secondary);
   text-align: center;
-  text-wrap: pretty;
+  text-overflow: ellipsis;
 }
 
 #btn-copy-to-clipboard {
@@ -228,13 +336,6 @@ input#password-length-input {
 
 /* Efeitos de transição */
 
-/* Estilo básico de foco para todos os elementos interativos */
-*:focus {
-  outline: 3px solid var(--btn-primary-background-color);
-  outline-offset: 2px;
-  transition: all 0.07s ease;
-}
-
 /* Estilo personalizado para botoões claros */
 #btn-generate-password:hover {
   background-color: var(--btn-focus-color);  
@@ -256,16 +357,12 @@ input#password-length-input {
 /* Media queries */
 
 @media screen and (max-width: 600px) {
-  body {
-    max-width: 100%;
-  }
-
   #main-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    padding-top: 50px;
+    padding: 40px;
   }
 
   #main-title {
@@ -279,16 +376,34 @@ input#password-length-input {
   }
 
   .password-options-container{
-    flex-direction: column;
-    
+    flex-direction: column;    
     gap: 30px;
   }
 
+  .password-length-container{
+    flex-direction: column;    
+    gap: 20px;
+  }
+
+  /* .password-checkbox-container{
+    flex-flow: column wrap;
+  } */
+
+  .checkbox-wrapper {
+    width: 100%;
+  }
+
   #btn-generate-password {
+    width: 100%;
+    justify-content: center;
     text-align: center;
   }
 
   .divider {
+    width: 100%;
+  }
+
+  .password-output{
     width: 100%;
   }
 }
