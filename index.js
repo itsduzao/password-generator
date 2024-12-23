@@ -1,23 +1,31 @@
 import { generatePassword } from './scripts/generatePassword.js'
 
 const passwordForm = document.getElementById('password-form');
-const btnGeneratePassword = document.getElementById('btn-generate-password')
-const passwordDisplayElement = document.getElementById('password-output')
 const passwordLengthInput = document.getElementById(
   'password-length-input'
 )
-const includerLowercaseCheckbox = document.getElementById('password-lowercase-checkbox')
-const includerUppercaseCheckbox = document.getElementById('password-uppercase-checkbox')
+const passwordLengthOutput = document.getElementById('password-length-output')
+
+const passwordCheckboxOptionsContainer = document.getElementById("password-checkbox-container")
+const includeLowercaseCheckbox = document.getElementById('password-lowercase-checkbox')
+const includeUppercaseCheckbox = document.getElementById('password-uppercase-checkbox')
 const includeNumbersCheckbox = document.getElementById(
   'password-numbers-checkbox'
 )
 const includeSpecialCharsCheckbox = document.getElementById(
   'password-special-chars-checkbox'
 )
+const checkboxes = passwordCheckboxOptionsContainer.querySelectorAll('input[type="checkbox"]')  
 
-const passwordCheckboxOptionsContainer = document.getElementById("password-checkbox-container")
+const passwordDisplayElement = document.getElementById('password-output')
+const btnGeneratePassword = document.getElementById('btn-generate-password')
+const btnCopyToClipBoard = document.getElementById("btn-copy-to-clipboard")
 
-passwordCheckboxOptionsContainer.addEventListener("change", () => {
+document.addEventListener('DOMContentLoaded', () => {
+  passwordForm.reset();
+});
+
+passwordCheckboxOptionsContainer.addEventListener("input", () => {
   const selectedCheckboxes = passwordCheckboxOptionsContainer.querySelectorAll('input:checked')
   if (selectedCheckboxes.length > 1) {
     return selectedCheckboxes.forEach(checkbox => checkbox.removeAttribute("disabled"))
@@ -25,16 +33,19 @@ passwordCheckboxOptionsContainer.addEventListener("change", () => {
   selectedCheckboxes.item(0).setAttribute("disabled", "true")
 })
 
-document.addEventListener('DOMContentLoaded', () => {
-  passwordForm.reset();
-});
+checkboxes.forEach(checkbox => checkbox.addEventListener("input", (event) => {
+  const isChecked = event.target.checked
+  event.target.setAttribute('aria-checked', `${isChecked}`)
+}))
 
 btnGeneratePassword.addEventListener('click', (event) => {
+  console.log("🚀 ~ checkboxes.forEach ~ event.target:", event.target)
+  console.log("🚀 ~ checkboxes.forEach ~ event.target:", event.target)
   event.preventDefault()
   
   const passwordLength = passwordLengthInput.value
-  const isLowercaseIncluded = includerLowercaseCheckbox.checked
-  const isUppercaseIncluded = includerUppercaseCheckbox.checked
+  const isLowercaseIncluded = includeLowercaseCheckbox.checked
+  const isUppercaseIncluded = includeUppercaseCheckbox.checked
   const isNumberIncluded = includeNumbersCheckbox.checked
   const isSpecialCharIncluded = includeSpecialCharsCheckbox.checked
 
@@ -49,8 +60,6 @@ btnGeneratePassword.addEventListener('click', (event) => {
   const password = generatePassword(passwordOptions)
   passwordDisplayElement.value = password
 })
-
-const btnCopyToClipBoard = document.getElementById("btn-copy-to-clipboard")
 
 btnCopyToClipBoard.addEventListener('click', () => copyToClipBoard(passwordDisplayElement.value))
 
@@ -73,21 +82,12 @@ async function copyToClipBoard(text) {
   }
 }
 
-function preventPasteAndDrop(event) {
-  event.preventDefault();
-  return false;
-}
+passwordLengthInput.addEventListener('input', (event) => {
+  const currentInputValue = event.target.value
 
-passwordLengthInput.addEventListener('paste', preventPasteAndDrop)
-passwordLengthInput.addEventListener('drop', preventPasteAndDrop);
-passwordLengthInput.addEventListener('dragover', preventPasteAndDrop);
+  passwordLengthOutput.textContent = currentInputValue
 
-function validateNumberInput(event) {
-  return /[0-9]/.test(event.key);
-}
-
-passwordLengthInput.addEventListener('keypress', (event) => {
-  if (!validateNumberInput(event)) {
-    event.preventDefault();
-  }
-});
+  passwordLengthInput.setAttribute("value", `${currentInputValue}`)
+  passwordLengthInput.setAttribute("aria-valuenow", `${currentInputValue}`)
+  passwordLengthOutput.setAttribute("aria-valuenow", `${currentInputValue}`)
+} )
