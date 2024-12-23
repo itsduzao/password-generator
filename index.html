@@ -24,7 +24,7 @@
         <input type="range" id="password-length-input" class="password-options" min="8" max="40" value="12"
           aria-labelledby="password-length-label" aria-live="polite" aria-valuemin="8" aria-valuemax="40"
           aria-valuenow="12">
-        <output id="password-length-output" for="password-length-input">12</output>
+        <output id="password-length-output" for="password-length-input" aria-valuenow="12">12</output>
         <span id="password-length-description" class="sr-only">Select the number of characters for your password.
           Minimum 8, maximum 40.</span>
       </div>
@@ -33,25 +33,25 @@
           <label for="password-lowercase-checkbox" id="password-lowercase-checkbox-label"
             class="password-options-label">Lowercase</label>
           <input type="checkbox" id="password-lowercase-checkbox" class="password-options"
-            aria-labelledby="password-lowercase-checkbox-label" aria-live="polite" checked>
+            aria-labelledby="password-lowercase-checkbox-label" aria-live="polite" aria-checked="true" checked>
         </div>
         <div class="checkbox-wrapper">
           <label for="password-uppercase-checkbox" id="password-uppercase-checkbox-label"
             class="password-options-label">Uppercase</label>
           <input type="checkbox" id="password-uppercase-checkbox" class="password-options"
-            aria-labelledby="password-uppercase-checkbox-label" aria-live="polite" checked>
+            aria-labelledby="password-uppercase-checkbox-label" aria-live="polite" aria-checked="true" checked>
         </div>
         <div class="checkbox-wrapper">
           <label for="password-numbers-checkbox" id="password-numbers-checkbox-label"
             class="password-options-label">Numbers</label>
           <input type="checkbox" id="password-numbers-checkbox" class="password-options"
-            aria-labelledby="password-numbers-checkbox-label" aria-live="polite">
+            aria-labelledby="password-numbers-checkbox-label" aria-live="polite" aria-checked="false">
         </div>
         <div class="checkbox-wrapper">
           <label for="password-special-chars-checkbox"
             id="password-special-chars-checkbox-label" class="password-options-label">Symbols</label>
           <input type="checkbox" id="password-special-chars-checkbox" class="password-options"
-            aria-labelledby="password-special-chars-checkbox-label" aria-live="polite">
+            aria-labelledby="password-special-chars-checkbox-label" aria-live="polite" aria-checked="false">
         </div>
       </div>
       <button title="Generate password" class="btn-light" id="btn-generate-password" aria-label="Generate password"
