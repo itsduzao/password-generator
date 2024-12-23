@@ -5,9 +5,10 @@ const CHAR_GROUPS = {
   specialChars: '!@#$%^&*()_+[]{}|;:,.<>?/'.split(''),
 }
 
-export function generatePassword({ length, characterGroups }) {
+export function generatePassword({ length, lowercase, uppercase, numbers, specialChars }) {
   const passwordArr = [] 
   const targetLength = Number.parseInt(length)
+  const characterGroups = {lowercase, uppercase, numbers, specialChars}
 
   const selectedCharacterGroups = Object.keys(characterGroups).filter(
     group => characterGroups[group]
@@ -33,7 +34,6 @@ export function generatePassword({ length, characterGroups }) {
   }
 
   const password = passwordArr.join('')
-  console.log("🚀 ~ generatePassword ~ password:", password)
 
   return password
 }
@@ -60,13 +60,3 @@ function shuffleArray(array) {
   })
   return shuffled
 }
-
-
-const myObj = {length: 2, characterGroups: {
-  lowercase: true,
-  uppercase: true,
-  numbers: true,
-  specialChars: true
-}} 
-
-generatePassword(myObj)
