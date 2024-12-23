@@ -188,6 +188,10 @@ output#password-length-output {
   font-style: normal;
   font-weight: bold;
   font-size: 1rem;
+
+  min-width: 2ch;
+  text-align: center;
+  display: inline-block;
 }
 
 .password-checkbox-container {
