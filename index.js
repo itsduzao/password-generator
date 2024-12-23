@@ -6,12 +6,24 @@ const passwordDisplayElement = document.getElementById('password-output')
 const passwordLengthInput = document.getElementById(
   'password-length-input'
 )
+const includerLowercaseCheckbox = document.getElementById('password-lowercase-checkbox')
+const includerUppercaseCheckbox = document.getElementById('password-uppercase-checkbox')
 const includeNumbersCheckbox = document.getElementById(
   'password-numbers-checkbox'
 )
 const includeSpecialCharsCheckbox = document.getElementById(
   'password-special-chars-checkbox'
 )
+
+const passwordCheckboxOptionsContainer = document.getElementById("password-checkbox-container")
+
+passwordCheckboxOptionsContainer.addEventListener("change", () => {
+  const selectedCheckboxes = passwordCheckboxOptionsContainer.querySelectorAll('input:checked')
+  if (selectedCheckboxes.length > 1) {
+    return selectedCheckboxes.forEach(checkbox => checkbox.removeAttribute("disabled"))
+  }
+  selectedCheckboxes.item(0).setAttribute("disabled", "true")
+})
 
 document.addEventListener('DOMContentLoaded', () => {
   passwordForm.reset();
@@ -21,17 +33,17 @@ btnGeneratePassword.addEventListener('click', (event) => {
   event.preventDefault()
   
   const passwordLength = passwordLengthInput.value
+  const isLowercaseIncluded = includerLowercaseCheckbox.checked
+  const isUppercaseIncluded = includerUppercaseCheckbox.checked
   const isNumberIncluded = includeNumbersCheckbox.checked
   const isSpecialCharIncluded = includeSpecialCharsCheckbox.checked
 
   const passwordOptions = {
     length: passwordLength,
-    charGroups: {
-    lowercase: true,
-    uppercase: true,
+    lowercase: isLowercaseIncluded,
+    uppercase: isUppercaseIncluded,
     numbers: isNumberIncluded,
-    specialChars: isSpecialCharIncluded,
-    }
+    specialChars: isSpecialCharIncluded
   }
 
   const password = generatePassword(passwordOptions)
