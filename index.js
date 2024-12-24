@@ -39,8 +39,6 @@ checkboxes.forEach(checkbox => checkbox.addEventListener("input", (event) => {
 }))
 
 btnGeneratePassword.addEventListener('click', (event) => {
-  console.log("🚀 ~ checkboxes.forEach ~ event.target:", event.target)
-  console.log("🚀 ~ checkboxes.forEach ~ event.target:", event.target)
   event.preventDefault()
   
   const passwordLength = passwordLengthInput.value
@@ -63,7 +61,7 @@ btnGeneratePassword.addEventListener('click', (event) => {
 
 btnCopyToClipBoard.addEventListener('click', () => copyToClipBoard(passwordDisplayElement.value))
 
-async function copyToClipBoard(text) {
+async function copyToClipBoard() {
   if (!passwordDisplayElement.value) return
   
   try {
