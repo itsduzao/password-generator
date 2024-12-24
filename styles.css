@@ -212,9 +212,16 @@ output#password-length-output {
   gap: 10px;
 }
 
-.btn-light {
-  display: flex;
+.divider {
+  width: clamp(250px - 30%, 100%, 446px);
+  border: 1px solid var(--bg-secondary-color);
+}
 
+.divider#between-options-and-password-output {
+  margin-bottom: calc(36/16 * 1rem);
+}
+
+.btn-light {
   border: none;
 
   cursor: pointer;
@@ -226,6 +233,7 @@ output#password-length-output {
 }
 
 #btn-generate-password {
+  width: fit-content;
   padding: 0.5rem 1rem;
 
   background: var(--btn-primary-background-color);
@@ -233,34 +241,31 @@ output#password-length-output {
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
   border-radius: 6px;
 
-  margin-bottom: calc(36/16 * 1rem);
-
   font-family: 'Inter', sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 1rem;
   line-height: 24px;
+  text-align: center;
+  text-wrap: nowrap;
 
   color: var(--bg-secondary-color);
-}
-
-.divider {
-  width: clamp(250px - 30%, 100%, 446px);
-  border: 1px solid var(--bg-secondary-color);
-}
-
-.divider#between-generate-and-password {
-  margin-bottom: calc(36/16 * 1rem);
 }
 
 .password-output-container {
   width: 100%;
   display: flex;
-  gap: 20px;
+  gap: 12px;
+}
+
+.password-output-wrapper {
+  width: 100%;
+  display: flex;
+  gap: 12px;
 }
 
 .password-output {
-  width: 210px;
+  width: 100%;
   height: auto;
 
   text-align: center;
@@ -289,7 +294,7 @@ output#password-length-output {
 
 #btn-copy-to-clipboard {
   height: 40px;
-  width: 40px;
+  width: 50px;
   
   display: flex;
   align-items: center;
@@ -389,25 +394,22 @@ output#password-length-output {
     gap: 20px;
   }
 
-  /* .password-checkbox-container{
-    flex-flow: column wrap;
-  } */
-
   .checkbox-wrapper {
     width: 100%;
-  }
-
-  #btn-generate-password {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
   }
 
   .divider {
     width: 100%;
   }
 
-  .password-output{
+  .password-output-container{
+    display: flex;
+    flex-direction: column;
+  }
+
+  #btn-generate-password {
     width: 100%;
+    justify-content: center;
+    text-align: center;
   }
 }
