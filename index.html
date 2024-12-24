@@ -54,16 +54,16 @@
             aria-labelledby="password-special-chars-checkbox-label" aria-live="polite" aria-checked="false">
         </div>
       </div>
+      <hr class="divider" id="between-options-and-password-output">
+      <div class="password-output-container">
       <button title="Generate password" class="btn-light" id="btn-generate-password" aria-label="Generate password"
-        role="button">Generate password</button>
-    </form>
-    <hr class="divider" id="between-generate-and-password">
-    <div class="password-output-container">
+      role="button">Generate password</button>
+      <div class="password-output-wrapper">
       <input type="text" id="password-output" class="password-output" autocomplete="off"
-        placeholder="Password appears here" aria-label="Output for password" aria-live="polite" readonly>
-      <button title="Copy to clipboard" class="btn-light" id="btn-copy-to-clipboard"
-        aria-label="Copy password to clipboard" role="button">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="2.0"
+          placeholder="Password appears here" aria-label="Output for password" aria-live="polite" readonly>
+          <button title="Copy to clipboard" class="btn-light" id="btn-copy-to-clipboard"
+          aria-label="Copy password to clipboard" role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="2.0"
           stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <title>Two boards in front of each other</title>
           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -72,6 +72,8 @@
         </svg>
       </button>
     </div>
+    </div>
+  </form>
   </main>
   <div class="toast" id="copy-toast">Password copied to clipboard!</div>
 </body>
