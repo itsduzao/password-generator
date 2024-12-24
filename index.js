@@ -1,46 +1,57 @@
-import { generatePassword } from './scripts/generatePassword.js'
+import { generatePassword } from './scripts/generatePassword/index.js'
 
-const passwordForm = document.getElementById('password-form');
-const passwordLengthInput = document.getElementById(
-  'password-length-input'
-)
+const passwordForm = document.getElementById('password-form')
+const passwordLengthInput = document.getElementById('password-length-input')
 const passwordLengthOutput = document.getElementById('password-length-output')
 
-const passwordCheckboxOptionsContainer = document.getElementById("password-checkbox-container")
-const includeLowercaseCheckbox = document.getElementById('password-lowercase-checkbox')
-const includeUppercaseCheckbox = document.getElementById('password-uppercase-checkbox')
+const passwordCheckboxOptionsContainer = document.getElementById(
+  'password-checkbox-container'
+)
+const includeLowercaseCheckbox = document.getElementById(
+  'password-lowercase-checkbox'
+)
+const includeUppercaseCheckbox = document.getElementById(
+  'password-uppercase-checkbox'
+)
 const includeNumbersCheckbox = document.getElementById(
   'password-numbers-checkbox'
 )
 const includeSpecialCharsCheckbox = document.getElementById(
   'password-special-chars-checkbox'
 )
-const checkboxes = passwordCheckboxOptionsContainer.querySelectorAll('input[type="checkbox"]')  
+const checkboxes = passwordCheckboxOptionsContainer.querySelectorAll(
+  'input[type="checkbox"]'
+)
 
 const passwordDisplayElement = document.getElementById('password-output')
 const btnGeneratePassword = document.getElementById('btn-generate-password')
-const btnCopyToClipBoard = document.getElementById("btn-copy-to-clipboard")
+const btnCopyToClipBoard = document.getElementById('btn-copy-to-clipboard')
 
 document.addEventListener('DOMContentLoaded', () => {
-  passwordForm.reset();
-});
-
-passwordCheckboxOptionsContainer.addEventListener("input", () => {
-  const selectedCheckboxes = passwordCheckboxOptionsContainer.querySelectorAll('input:checked')
-  if (selectedCheckboxes.length > 1) {
-    return selectedCheckboxes.forEach(checkbox => checkbox.removeAttribute("disabled"))
-  }
-  selectedCheckboxes.item(0).setAttribute("disabled", "true")
+  passwordForm.reset()
 })
 
-checkboxes.forEach(checkbox => checkbox.addEventListener("input", (event) => {
-  const isChecked = event.target.checked
-  event.target.setAttribute('aria-checked', `${isChecked}`)
-}))
+passwordCheckboxOptionsContainer.addEventListener('input', () => {
+  const selectedCheckboxes =
+    passwordCheckboxOptionsContainer.querySelectorAll('input:checked')
+  if (selectedCheckboxes.length > 1) {
+    return selectedCheckboxes.forEach(checkbox =>
+      checkbox.removeAttribute('disabled')
+    )
+  }
+  selectedCheckboxes.item(0).setAttribute('disabled', 'true')
+})
 
-btnGeneratePassword.addEventListener('click', (event) => {
+checkboxes.forEach(checkbox =>
+  checkbox.addEventListener('input', event => {
+    const isChecked = event.target.checked
+    event.target.setAttribute('aria-checked', `${isChecked}`)
+  })
+)
+
+btnGeneratePassword.addEventListener('click', event => {
   event.preventDefault()
-  
+
   const passwordLength = passwordLengthInput.value
   const isLowercaseIncluded = includeLowercaseCheckbox.checked
   const isUppercaseIncluded = includeUppercaseCheckbox.checked
@@ -52,40 +63,42 @@ btnGeneratePassword.addEventListener('click', (event) => {
     lowercase: isLowercaseIncluded,
     uppercase: isUppercaseIncluded,
     numbers: isNumberIncluded,
-    specialChars: isSpecialCharIncluded
+    specialChars: isSpecialCharIncluded,
   }
 
   const password = generatePassword(passwordOptions)
   passwordDisplayElement.value = password
 })
 
-btnCopyToClipBoard.addEventListener('click', () => copyToClipBoard(passwordDisplayElement.value))
+btnCopyToClipBoard.addEventListener('click', () =>
+  copyToClipBoard(passwordDisplayElement.value)
+)
 
 async function copyToClipBoard() {
   if (!passwordDisplayElement.value) return
-  
+
   try {
-    await navigator.clipboard.writeText(passwordDisplayElement.value);
-    
-    const toast = document.getElementById('copy-toast');
-    toast.classList.add('show');
-    
+    await navigator.clipboard.writeText(passwordDisplayElement.value)
+
+    const toast = document.getElementById('copy-toast')
+    toast.classList.add('show')
+
     setTimeout(() => {
-      toast.classList.remove('show');
-    }, 3000);
-    
+      toast.classList.remove('show')
+    }, 3000)
   } catch (err) {
-    passwordDisplayElement.select();
-    document.execCommand('copy');
+    passwordDisplayElement.select()
+    document.execCommand('copy')
   }
 }
 
-passwordLengthInput.addEventListener('input', (event) => {
+passwordLengthInput.addEventListener('input', event => {
   const currentInputValue = event.target.value
 
   passwordLengthOutput.textContent = currentInputValue
 
-  passwordLengthInput.setAttribute("value", `${currentInputValue}`)
-  passwordLengthInput.setAttribute("aria-valuenow", `${currentInputValue}`)
-  passwordLengthOutput.setAttribute("aria-valuenow", `${currentInputValue}`)
-} )
+  passwordLengthInput.setAttribute('value', `${currentInputValue}`)
+  passwordLengthInput.setAttribute('aria-valuenow', `${currentInputValue}`)
+  passwordLengthOutput.setAttribute('aria-valuenow', `${currentInputValue}`)
+})
+
