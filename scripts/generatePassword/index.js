@@ -1,9 +1,6 @@
-const CHAR_GROUPS = {
-  uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
-  lowercase: 'abcdefghijklmnopqrstuvwxyz'.split(''),
-  numbers: '0123456789'.split(''),
-  specialChars: '!@#$%^&*()_+[]{}|;:,.<>?/'.split(''),
-}
+import { generateRandomCharacter } from "../utils/generateRandomCharacter.js"
+import { generateRandomIndex } from "../utils/generateRandomIndex.js"
+import { shuffleArray } from "../utils/shuffleArray.js"
 
 export function generatePassword({ length, lowercase, uppercase, numbers, specialChars }) {
   const passwordArr = [] 
@@ -16,7 +13,7 @@ export function generatePassword({ length, lowercase, uppercase, numbers, specia
 
   const reorderedSelectedCharGroups = shuffleArray(selectedCharacterGroups)
   
-  // Se targetLength > selectedGroups  
+  // Se targetLength > selectedCharacterGroups  
   // adiciona ao menos um char de cada grupo
   reorderedSelectedCharGroups.map(group => {
     if (reorderedSelectedCharGroups.length <= targetLength) {
@@ -25,7 +22,7 @@ export function generatePassword({ length, lowercase, uppercase, numbers, specia
   }
   )
 
-  // selectedGroups > targetLength
+  // selectedCharacterGroups > targetLength
   while (passwordArr.length < targetLength) {
     const randomGroup =
       reorderedSelectedCharGroups[generateRandomIndex(reorderedSelectedCharGroups.length)]
@@ -38,25 +35,4 @@ export function generatePassword({ length, lowercase, uppercase, numbers, specia
   return password
 }
 
-function generateRandomCharacter(characterGroups) {
-  const chars = CHAR_GROUPS[characterGroups]
-  const randomIndex = generateRandomIndex(chars.length)
-  const randomCharacter = chars[randomIndex]
-  return randomCharacter
-}
 
-function generateRandomIndex(arrayLength) {
-  return Math.floor(Math.random() * arrayLength)
-}
-
-function shuffleArray(array) {
-  const shuffled = [...array]
-  shuffled.reduce((_acc, _item, currentIndex) => {
-    const randomIndex = generateRandomIndex(shuffled.length)
-    ;[shuffled[randomIndex], shuffled[currentIndex]] = [
-      shuffled[currentIndex],
-      shuffled[randomIndex],
-    ]
-  })
-  return shuffled
-}
