@@ -1,12 +1,16 @@
 import { generatePassword } from './scripts/generatePassword/index.js'
 import { getPasswordOptions } from './scripts/utils/getPasswordOptions.js';
 import { copyToClipboard } from './scripts/copyToClipboard/index.js'
+import { updatePasswordOutputDisplay } from './scripts/events/updatePasswordOutputDisplay.js';
+import { toggleCheckboxDisableState } from './scripts/events/toggleCheckboxDisableState.js';
+import { updateElementAttribute } from './scripts/events/updateElementAttribute.js'
 
 const elements = {
   form: document.getElementById('password-form'),
   lengthInput: document.getElementById('password-length-input'),
   lengthOutput: document.getElementById('password-length-output'),
   checkboxContainer: document.getElementById('password-checkbox-container'),
+  checkboxes: document.querySelectorAll('input[type="checkbox"]'),
   lowercaseCheckbox: document.getElementById('password-lowercase-checkbox'),
   uppercaseCheckbox: document.getElementById('password-uppercase-checkbox'),
   numbersCheckbox: document.getElementById('password-numbers-checkbox'),
@@ -20,23 +24,17 @@ document.addEventListener('DOMContentLoaded', () => {
   elements.form.reset()
 })
 
-passwordCheckboxOptionsContainer.addEventListener('input', () => {
-  const selectedCheckboxes =
-    passwordCheckboxOptionsContainer.querySelectorAll('input:checked')
-  if (selectedCheckboxes.length > 1) {
-    return selectedCheckboxes.forEach(checkbox =>
-      checkbox.removeAttribute('disabled')
-    )
-  }
-  selectedCheckboxes.item(0).setAttribute('disabled', 'true')
+elements.lengthInput.addEventListener('input', () => {
+  updatePasswordOutputDisplay(elements.lengthInput, elements.lengthOutput)
 })
 
-checkboxes.forEach(checkbox =>
-  checkbox.addEventListener('input', event => {
-    const isChecked = event.target.checked
-    event.target.setAttribute('aria-checked', `${isChecked}`)
-  })
-)
+elements.checkboxContainer.addEventListener('input', () => {
+  toggleCheckboxDisableState(elements.checkboxContainer)
+})
+
+elements.checkboxes.forEach(checkbox => checkbox.addEventListener('click', () => {
+  updateElementAttribute(checkbox, 'aria-checked', checkbox.checked)
+}))
 
 elements.btnGeneratePassword.addEventListener('click', event => {
   event.preventDefault()
@@ -48,15 +46,5 @@ elements.btnGeneratePassword.addEventListener('click', event => {
 elements.btnCopyToClipboard.addEventListener('click', event => {
   event.preventDefault()
   copyToClipboard(passwordDisplayElement.value)
-})
-
-passwordLengthInput.addEventListener('input', event => {
-  const currentInputValue = event.target.value
-
-  passwordLengthOutput.textContent = currentInputValue
-
-  passwordLengthInput.setAttribute('value', `${currentInputValue}`)
-  passwordLengthInput.setAttribute('aria-valuenow', `${currentInputValue}`)
-  passwordLengthOutput.setAttribute('aria-valuenow', `${currentInputValue}`)
 })
 
