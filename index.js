@@ -1,4 +1,5 @@
 import { generatePassword } from './scripts/generatePassword/index.js'
+import { copyToClipboard } from './scripts/copyToClipboard/index.js';
 
 const passwordForm = document.getElementById('password-form')
 const passwordLengthInput = document.getElementById('password-length-input')
@@ -70,27 +71,10 @@ btnGeneratePassword.addEventListener('click', event => {
   passwordDisplayElement.value = password
 })
 
-btnCopyToClipBoard.addEventListener('click', () =>
-  copyToClipBoard(passwordDisplayElement.value)
-)
-
-async function copyToClipBoard() {
-  if (!passwordDisplayElement.value) return
-
-  try {
-    await navigator.clipboard.writeText(passwordDisplayElement.value)
-
-    const toast = document.getElementById('copy-toast')
-    toast.classList.add('show')
-
-    setTimeout(() => {
-      toast.classList.remove('show')
-    }, 3000)
-  } catch (err) {
-    passwordDisplayElement.select()
-    document.execCommand('copy')
-  }
-}
+btnCopyToClipBoard.addEventListener('click', event => {
+  event.preventDefault()
+  copyToClipboard(passwordDisplayElement.value)
+})
 
 passwordLengthInput.addEventListener('input', event => {
   const currentInputValue = event.target.value
