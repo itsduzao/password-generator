@@ -1,35 +1,23 @@
 import { generatePassword } from './scripts/generatePassword/index.js'
-import { copyToClipboard } from './scripts/copyToClipboard/index.js';
+import { getPasswordOptions } from './scripts/utils/getPasswordOptions.js';
+import { copyToClipboard } from './scripts/copyToClipboard/index.js'
 
-const passwordForm = document.getElementById('password-form')
-const passwordLengthInput = document.getElementById('password-length-input')
-const passwordLengthOutput = document.getElementById('password-length-output')
-
-const passwordCheckboxOptionsContainer = document.getElementById(
-  'password-checkbox-container'
-)
-const includeLowercaseCheckbox = document.getElementById(
-  'password-lowercase-checkbox'
-)
-const includeUppercaseCheckbox = document.getElementById(
-  'password-uppercase-checkbox'
-)
-const includeNumbersCheckbox = document.getElementById(
-  'password-numbers-checkbox'
-)
-const includeSpecialCharsCheckbox = document.getElementById(
-  'password-special-chars-checkbox'
-)
-const checkboxes = passwordCheckboxOptionsContainer.querySelectorAll(
-  'input[type="checkbox"]'
-)
-
-const passwordDisplayElement = document.getElementById('password-output')
-const btnGeneratePassword = document.getElementById('btn-generate-password')
-const btnCopyToClipBoard = document.getElementById('btn-copy-to-clipboard')
+const elements = {
+  form: document.getElementById('password-form'),
+  lengthInput: document.getElementById('password-length-input'),
+  lengthOutput: document.getElementById('password-length-output'),
+  checkboxContainer: document.getElementById('password-checkbox-container'),
+  lowercaseCheckbox: document.getElementById('password-lowercase-checkbox'),
+  uppercaseCheckbox: document.getElementById('password-uppercase-checkbox'),
+  numbersCheckbox: document.getElementById('password-numbers-checkbox'),
+  specialCharsCheckbox: document.getElementById('password-special-chars-checkbox'),
+  btnGeneratePassword: document.getElementById('btn-generate-password'),
+  btnCopyToClipboard: document.getElementById('btn-copy-to-clipboard'),
+  passwordOutputField: document.getElementById('password-output'),
+}
 
 document.addEventListener('DOMContentLoaded', () => {
-  passwordForm.reset()
+  elements.form.reset()
 })
 
 passwordCheckboxOptionsContainer.addEventListener('input', () => {
@@ -50,28 +38,14 @@ checkboxes.forEach(checkbox =>
   })
 )
 
-btnGeneratePassword.addEventListener('click', event => {
+elements.btnGeneratePassword.addEventListener('click', event => {
   event.preventDefault()
-
-  const passwordLength = passwordLengthInput.value
-  const isLowercaseIncluded = includeLowercaseCheckbox.checked
-  const isUppercaseIncluded = includeUppercaseCheckbox.checked
-  const isNumberIncluded = includeNumbersCheckbox.checked
-  const isSpecialCharIncluded = includeSpecialCharsCheckbox.checked
-
-  const passwordOptions = {
-    length: passwordLength,
-    lowercase: isLowercaseIncluded,
-    uppercase: isUppercaseIncluded,
-    numbers: isNumberIncluded,
-    specialChars: isSpecialCharIncluded,
-  }
-
-  const password = generatePassword(passwordOptions)
-  passwordDisplayElement.value = password
+  const options = getPasswordOptions(elements)
+  const password = generatePassword(options)
+  elements.passwordOutputField.value = password
 })
 
-btnCopyToClipBoard.addEventListener('click', event => {
+elements.btnCopyToClipboard.addEventListener('click', event => {
   event.preventDefault()
   copyToClipboard(passwordDisplayElement.value)
 })
