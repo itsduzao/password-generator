@@ -1,8 +1,7 @@
-import { updateElementAttribute } from './updateElementAttribute.js';
+import { updateElementAttribute } from './updateElementAttribute.js'
 
 export function updatePasswordOutputDisplay(input, output) {
-
-const currentInputValue = input
+  const currentInputValue = input.valueAsNumber
 
   output.textContent = currentInputValue
 
