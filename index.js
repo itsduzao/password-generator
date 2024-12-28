@@ -45,6 +45,6 @@ elements.btnGeneratePassword.addEventListener('click', event => {
 
 elements.btnCopyToClipboard.addEventListener('click', event => {
   event.preventDefault()
-  copyToClipboard(passwordDisplayElement.value)
+  copyToClipboard(elements.passwordOutputField.value)
 })
 
