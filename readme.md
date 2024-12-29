@@ -20,13 +20,6 @@ Um gerador de senhas aleatórias com interface amigável e opções personalizá
 - Módulos ES6
 - Design Responsivo
 
-## 🚀 Como Usar
-1. Clone o repositório
-2. Abra o [`index.html`](index.html) em seu navegador
-3. Selecione as opções desejadas
-4. Clique em "Gerar senha"
-5. Use o botão de copiar para usar a senha gerada
-
 ## 🎯 Funcionalidades
 - Geração de senhas aleatórias seguras
 - Interface responsiva para desktop e mobile
@@ -34,8 +27,19 @@ Um gerador de senhas aleatórias com interface amigável e opções personalizá
 - Validação de entrada para garantir senhas seguras
 - Cópia rápida para área de transferência
 
-## 🤝 Contribuindo
-Contribuições são bem-vindas! Sinta-se à vontade para:
-- 🐛 Reportar bugs
-- 💡 Sugerir novas features
-- 📖 Melhorar documentação
+## 🚀 Como Usar
+1. Clone o repositório
+```markdown
+git clone https://github.com/itsduzao/password-generator.git
+```
+3. Abra o [`index.html`](index.html) em seu navegador
+4. Selecione as opções desejadas
+5. Clique em "Gerar senha"
+6. Use o botão de copiar para usar a senha gerada
+
+## 🤝 Como Contribuir
+1. Faça um Fork do projeto
+2. Crie uma branch para sua feature (git checkout -b feature/AmazingFeature)
+3. Commit suas mudanças (git commit -m 'Add some AmazingFeature')
+4. Push para a branch (git push origin feature/AmazingFeature)
+5. Abra um Pull Request
