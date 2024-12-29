@@ -36,7 +36,7 @@ elements.checkboxes.forEach(checkbox => checkbox.addEventListener('click', () =>
   updateElementAttribute(checkbox, 'aria-checked', checkbox.checked)
 }))
 
-elements.btnGeneratePassword.addEventListener('click', event => {
+elements.form.addEventListener('submit', event => {
   event.preventDefault()
   const options = getPasswordOptions(elements)
   const password = generatePassword(options)
